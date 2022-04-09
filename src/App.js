@@ -25,9 +25,9 @@ import Layout from "./components/layout/Layout";
 import TeamDetail from "./pages/TeamDetail";
 import KhansortiumBlog from "./components/newsroom/KhansortiumBlog";
 import KhansortiumBlog1 from './components/newsroom/KhansortiumBlog1';  
-
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
+ 
+import "~slick-carousel/slick/slick.css"; 
+import "~slick-carousel/slick/slick-theme.css";
 
 
 function App() {

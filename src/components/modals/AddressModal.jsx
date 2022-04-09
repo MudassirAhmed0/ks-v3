@@ -1,5 +1,7 @@
 import './modal.css' 
-import OwlCarousel from 'react-owl-carousel';
+// import OwlCarousel from 'react-owl-carousel';
+import Slider from "react-slick";
+
 
 const AddressModal = ({stores,heading}) => {  
     
@@ -25,11 +27,47 @@ const AddressModal = ({stores,heading}) => {
 
         }
     }  }
+    var settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoPlay:true,
+        nav:true,
+        initialSlide: 0,
+        responsive: [
+          {
+            breakpoint: 1000,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              initialSlide: 2
+            }
+          },
+          {
+            breakpoint: 400,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      };
   return (
       <div className="modalContainer" id='addressModal'>
           <div className="modal">
               <h2>{heading} Stores</h2>
-             <OwlCarousel className='owl-theme'   autoplay   loop margin={10} nav dots={false} responsive={state.responsive}>
+             <Slider className='owl-theme'   {...settings}>
                 {stores?.map((store,index)=><div class='item'>
                    <h3>Store # {index +1}</h3>
                    <span>{store.address}</span>
@@ -37,7 +75,7 @@ const AddressModal = ({stores,heading}) => {
                    <span>{store.contact}</span>
                 </div>)}
                 
-            </OwlCarousel> 
+            </Slider> 
             {/* <div className='ModalAddressess'>
                 <div className="ModalRow">
                     <div>
