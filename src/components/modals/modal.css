@@ -22,7 +22,7 @@
   .modalContainer .modal {
     width: 97%;
     max-width: 866px;
-    background-color: #fff;
+    background-color: #E9EDF7;
     padding: 2rem;
     border-radius: 5px;
   }
@@ -70,6 +70,8 @@
     -webkit-transition: .4s;
     transition: .4s;
     display: block;
+    background-color: #222;
+    color: #fff;
   }
   
   .modalContainer button:hover {
@@ -78,7 +80,7 @@
   }
   
   .modalContainer .item{
-    display: flex;
+    display: flex!important;
     flex-direction: column;
     row-gap: 1rem;
     font-size: 1.2rem;
@@ -98,8 +100,42 @@
   .owl-nav button span{
     position: relative!important;
     top: -4px!important;
+  } 
+  .slick-list{
+    padding-bottom: 3.5rem;
+  }
+  .slick-arrow{
+    width: 40px!important;
+    height: 40px!important;
+    top: 70%!important;  
+    background-color: transparent!important;
+  }
+  .slick-arrow:hover{
+    background-color: transparent!important;
+  }
+  .slick-arrow::before{
+    font-size: 40px;
+    color: #222;
+  }
+  .slick-prev{
+    left: 47%!important;
+    transform: translateX(-50%)!important;
+  }
+  .slick-next{
+    right: 47%!important;
+    
+    transform: translateX(50%)!important;
   }
   @media (max-width: 768px) {
+    .slick-prev{
+      left: 42%!important;
+      transform: translateX(-50%)!important;
+    }
+    .slick-next{
+      right: 42%!important;
+      
+      transform: translateX(50%)!important;
+    }
     .modalContainer
   .modal {
       padding: 2rem 1rem;

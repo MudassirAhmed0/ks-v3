@@ -26,8 +26,8 @@ import TeamDetail from "./pages/TeamDetail";
 import KhansortiumBlog from "./components/newsroom/KhansortiumBlog";
 import KhansortiumBlog1 from './components/newsroom/KhansortiumBlog1';  
  
-import "~slick-carousel/slick/slick.css"; 
-import "~slick-carousel/slick/slick-theme.css";
+// import "~slick-carousel/slick/slick.css"; 
+// import "~slick-carousel/slick/slick-theme.css";
 
 
 function App() {

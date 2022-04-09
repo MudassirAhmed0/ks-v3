@@ -28,8 +28,7 @@ const AddressModal = ({stores,heading}) => {
         }
     }  }
     var settings = {
-        dots: true,
-        infinite: false,
+        infinite: true,
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -47,7 +46,7 @@ const AddressModal = ({stores,heading}) => {
             }
           },
           {
-            breakpoint: 600,
+            breakpoint: 800,
             settings: {
               slidesToShow: 2,
               slidesToScroll: 1,
@@ -55,7 +54,7 @@ const AddressModal = ({stores,heading}) => {
             }
           },
           {
-            breakpoint: 400,
+            breakpoint: 600,
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1
