@@ -1,5 +1,4 @@
 import './modal.css' 
-import $ from 'jquery';
 import OwlCarousel from 'react-owl-carousel';
 
 const AddressModal = ({stores,heading}) => {  
