@@ -1,38 +1,32 @@
 import './modal.css' 
 // import OwlCarousel from 'react-owl-carousel';
 import Slider from "react-slick";
+import { useEffect } from 'react';
 
 
-const AddressModal = ({stores,heading}) => {  
+const AddressModal = ({stores,heading,startCarousel,setShowModal}) => {  
     
   const closeModal =()=>{ 
     document.getElementById('addressModal').classList.remove('active')
+    startCarousel((prev)=>!prev)
+    setShowModal(false)
   } 
-   
-   const state={ responsive:{
-        0: {
-            items: 1,
-        },
-        400: {
-            items: 1,
-        },
-        600: {
-            items: 2,
-        },
-        700: {
-            items: 2.5,
-        },
-        1000: {
-            items: 3,
-
-        }
-    }  }
+   useEffect(()=>{ 
+     window.addEventListener('click',(e)=>{
+       
+      if(e.target.id ===  'addressModal'){
+       document.getElementById('addressModal').classList.remove('active')
+        startCarousel((prev)=>!prev)
+      }
+    }) 
+   }) 
     var settings = {
         infinite: true,
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,
-        autoPlay:true,
+        autoplay:true,
+        autoplaySpeed:5000,
         nav:true,
         initialSlide: 0,
         responsive: [
@@ -67,10 +61,10 @@ const AddressModal = ({stores,heading}) => {
           <div className="modal">
               <h2>{heading} Stores</h2>
              <Slider className='owl-theme'   {...settings}>
-                {stores?.map((store,index)=><div class='item'>
-                   <h3>Store # {index +1}</h3>
-                   <span>{store.address}</span>
-                   <span>{store.city} - {store.postalCode}</span>
+                {stores?.map((store,index)=><div ket={index} className='item'>
+                   <h3>Store # {store.storeCode ? store.storeCode:index}</h3>
+                   <a target={"_blank"} href={store.link}>{store.address}</a>
+                   <a target={"_blank"} href={store.link}>{store.city} {" "} {store.postalCode}</a>
                    <span>{store.contact}</span>
                 </div>)}
                 
@@ -110,3 +104,5 @@ const AddressModal = ({stores,heading}) => {
 }
 
 export default AddressModal
+
+

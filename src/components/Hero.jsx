@@ -152,10 +152,10 @@ const openModal =()=>{
                   }                <i className="fa fa-long-arrow-alt-right"></i>
               </button>
               }
-                {slidesContent[0].stores &&   <button onClick={openModal} className='FirstHeroBtnForVerticalPage'>
+                {/* {slidesContent[0].stores &&   <button onClick={openModal} className='FirstHeroBtnForVerticalPage'>
                       View Stores  
                   </button>
-              }  
+              }   */}
             </div>}
           </div>
         </div>
@@ -190,7 +190,7 @@ const openModal =()=>{
       </div>
    } 
    <Arrow/>
-   <AddressModal heading={ slidesContent[0].heading ==='We Are Wireless Boost 4.0' ? " Boost 4.0" :slidesContent[0].heading} stores={slidesContent[0].stores}/>
+   {/* <AddressModal heading={ slidesContent[0].heading ==='We Are Wireless Boost 4.0' ? " Boost 4.0" :slidesContent[0].heading} stores={slidesContent[0].stores}/> */}
    </div>
   );
 };

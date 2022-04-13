@@ -5,11 +5,16 @@ import content from '../../assets/data/vericalcards.js'
 import {gsap} from "gsap"
 import { ScrollTrigger } from "gsap/all";
 import { Link } from "react-router-dom";
+import AddressModal from "../modals/AddressModal.jsx";
 gsap.registerPlugin(ScrollTrigger)
 
 const Brands = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [inView,setInView] = useState(false)
+  const [stores,setStores] = useState([])  
+  const [resume,setResume] = useState(false)
+  const [storeHeading,setStoreHeading] = useState('')
+  const [showModal,setShowModal] =useState(false)
   const slider = useRef(null);
  let navSlider = useRef(null)
 
@@ -49,16 +54,25 @@ const Brands = () => {
       navSlider.current.scrollTo(scrolled ,0)
     }
  }
-  useEffect(() => {
-    let interval
-    if(inView){
-
-    interval= setInterval(() => {
+ const carouselInterval = useRef(null)
+ const startCarousel =()=>{
+      carouselInterval.current =  setInterval(() => {
         slideRight()
       }, 6000);
     }
-    return () => clearInterval(interval);
-  }, [currentSlide,inView]);
+ 
+  const stopCarousel =()=>{
+    clearInterval(carouselInterval.current)
+    carouselInterval.current = null;
+  }
+  useEffect(() => {
+    
+    if(inView){
+
+      startCarousel()
+    }
+    return () =>  stopCarousel();
+  }, [currentSlide,inView,resume]);
 
   useEffect(()=>{
          timeline.fromTo('#Brands',{autoAlpha:0},{autoAlpha:1})
@@ -118,6 +132,20 @@ const Brands = () => {
     slider.current.style.transform= `translateX(-${slideNum * 7.7}%)`
   };
 
+  const openModal =(item)=>{
+    setShowModal(true)
+    setTimeout(()=>{
+      modalOpener(item)
+    },50)
+  }
+  const modalOpener= (item) =>{
+    
+    setStoreHeading(item.heading)
+    setStores([...item.stores])
+    stopCarousel()
+  document.getElementById('addressModal').classList.add('active')
+  }
+
   return (
     <div ref={container} id='Brands' className="Brand">
       <div ref={slider} className="BrandSlider">
@@ -144,7 +172,7 @@ const Brands = () => {
               <div className="Brands_Btn_Group">
              { item.link &&
                 <a target="_blank" href={item.link}>
-                    <button className='Brands_PrimaryBtn'>
+                    <button className='Brands_PrimaryBtn Brands_PrimaryFilledBtn'>
                       Visit Website 
                     </button> 
                 </a>
@@ -155,11 +183,25 @@ const Brands = () => {
                 </button>
               </Link>
  */}
-            { item.slogan[0] &&   <Link to={`/verticals${item.heading}`}>
-                <button className='Brands_PrimaryBtn Brands_PrimaryFilledBtn'>
+            { item.stores ? "": item.slogan[0] &&   <Link to={`/verticals${item.heading}`}>
+                <button className='Brands_PrimaryBtn '>
                   Read More
                 </button>
-                </Link>}
+                </Link>} 
+                {
+                  item.stores &&
+               <>
+                  <button onClick={()=> openModal(item)}  className='Brands_PrimaryBtn Brands_PrimaryFilledBtn'>
+                      View Stores 
+                  </button> <br /><br />
+                  <Link to={`/verticals${item.heading}`}>
+                <button className='Brands_PrimaryBtn '>
+                  Read More
+                </button>
+                </Link>
+
+               </>
+                }
               </div>
             </div>
             {item.mobImg?
@@ -194,6 +236,11 @@ const Brands = () => {
             <i onClick={slideRight} className="fa fa-long-arrow-alt-right"></i>       
       
       </div>
+      {
+        showModal &&
+        <AddressModal   setShowModal={setShowModal} startCarousel={setResume} heading={ storeHeading ==='We Are Wireless Boost 4.0' ? " Boost 4.0" :storeHeading} stores={stores}/>
+      }
+   
     </div>
   );
 };
